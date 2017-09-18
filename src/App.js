@@ -6,6 +6,7 @@ import Colors from './Colors';
 class App extends Component {
   constructor() {
     super();
+
     this.state = {
       textColor: "#000000",
       backgroundColor: "#858f92",
@@ -13,11 +14,13 @@ class App extends Component {
       backgroundColorHistory: ["#858f92"],
       index: 0
     }
+
     this.randomize = this.randomize.bind(this);
-    this.changeColorsAndAddThemToHistory = 
-      this.changeColorsAndAddThemToHistory.bind(this)
+    this.generateNewColorsAndAddThemToHistory = 
+      this.generateNewColorsAndAddThemToHistory.bind(this)
     this.handleGoingForward = this.handleGoingForward.bind(this);
     this.handleGoingBackward = this.handleGoingBackward.bind(this);
+
     window.addEventListener("keydown", this.randomize);
   }
 
@@ -33,7 +36,7 @@ class App extends Component {
 
   handleGoingForward() {
     if (this.atEndOfHistory()) {
-      this.changeColorsAndAddThemToHistory();
+      this.generateNewColorsAndAddThemToHistory();
     } else {
       this.changeToNextColors();
     }
@@ -45,7 +48,7 @@ class App extends Component {
   }
 
 
-  changeColorsAndAddThemToHistory() {
+  generateNewColorsAndAddThemToHistory() {
     const newTextColor = this.generateRandomColor();
     const newBackgroundColor = this.generateRandomColor();
 
@@ -65,7 +68,6 @@ class App extends Component {
       index: newIndex
     });
   }
-
 
 
   atEndOfHistory() {
