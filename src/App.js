@@ -1,85 +1,75 @@
 import React, { Component } from 'react';
+import Instructions from './Instructions';
+import Random from './Random';
+import Colors from './Colors';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       textColor: "#000000",
-      backgroundColor: "#ffffff",
-      textColorHistory: [],
-      backgroundColorHistory: [],
+      backgroundColor: "#858f92",
+      textColorHistory: ["#000000"],
+      backgroundColorHistory: ["#858f92"],
       index: 0
     }
     this.randomize = this.randomize.bind(this);
-    this.saveCurrentColors = this.saveCurrentColors.bind(this);
+    this.changeColorsAndAddThemToHistory = 
+      this.changeColorsAndAddThemToHistory.bind(this)
+    this.handleGoingForward = this.handleGoingForward.bind(this);
+    this.handleGoingBackward = this.handleGoingBackward.bind(this);
     window.addEventListener("keydown", this.randomize);
-  }
-
-
-  componentDidMount() {
-    this.saveCurrentColors();
-  }
-
-
-  saveCurrentColors() {
-    let newTextColorHistory = this.state.textColorHistory.slice();
-    let newBackgroundColorHistory = this.state.backgroundColorHistory.slice();
-
-    newTextColorHistory.push(this.state.textColor);
-    newBackgroundColorHistory.push(this.state.backgroundColor);
-
-    this.setState({
-      textColorHistory: newTextColorHistory,
-      backgroundColorHistory: newBackgroundColorHistory,
-    });
   }
 
 
   randomize(event) {
     if (event.key === "ArrowRight") {
-      if (this.atEndOfHistory()) {
-        this.changeToNewColors();
-        this.saveCurrentColors();
-        this.increaseIndex();
-      } else {
-        this.increaseIndex();
-        this.changeToNextColors();
-      }
+      this.handleGoingForward();
     } else if (event.key === "ArrowLeft") {
-      this.decreaseIndex();
-      this.changeToPreviousColors();
+      this.handleGoingBackward();
     }
   }
 
 
-  atEndOfHistory() {
-    return this.state.index === this.state.textColorHistory.length - 1;
-  }
-
-
-  increaseIndex() {
-    let newIndex = this.state.index + 1;
-    this.setState({ index: newIndex });
-  }
-
-
-  decreaseIndex() {
-    let newIndex = this.state.index;
-    if (newIndex > 0) {
-      newIndex--;
+  handleGoingForward() {
+    if (this.atEndOfHistory()) {
+      this.changeColorsAndAddThemToHistory();
+    } else {
+      this.changeToNextColors();
     }
-    this.setState({ index: newIndex });
   }
 
 
-  changeToNewColors() {
-    let newTextColor = this.generateRandomColor();
-    let newBackgroundColor = this.generateRandomColor();
+  handleGoingBackward(event) {
+    this.changeToPreviousColors();
+  }
+
+
+  changeColorsAndAddThemToHistory() {
+    const newTextColor = this.generateRandomColor();
+    const newBackgroundColor = this.generateRandomColor();
+
+    const newTextColorHistory = this.state.textColorHistory.slice();
+    const newBackgroundColorHistory = this.state.backgroundColorHistory.slice();
+
+    newTextColorHistory.push(newTextColor);
+    newBackgroundColorHistory.push(newBackgroundColor);
+
+    const newIndex = this.state.index + 1;
 
     this.setState({
       textColor: newTextColor,
       backgroundColor: newBackgroundColor,
+      textColorHistory: newTextColorHistory,
+      backgroundColorHistory: newBackgroundColorHistory,
+      index: newIndex
     });
+  }
+
+
+
+  atEndOfHistory() {
+    return (this.state.index === (this.state.textColorHistory.length - 1));
   }
 
 
@@ -94,31 +84,53 @@ class App extends Component {
 
 
   changeToNextColors() {
-    let newTextColor = this.state.textColorHistory[this.state.index];
-    let newBackgroundColor = this.state.backgroundColorHistory[this.state.index];
+    const newIndex = this.state.index + 1;
+    let newTextColor = this.state.textColorHistory[newIndex];
+    let newBackgroundColor = this.state.backgroundColorHistory[newIndex];
 
     this.setState({
       textColor: newTextColor,
       backgroundColor: newBackgroundColor,
+      index: newIndex
     });
   }
 
   changeToPreviousColors() {
-    let newTextColor = this.state.textColorHistory[this.state.index];
-    let newBackgroundColor = this.state.backgroundColorHistory[this.state.index];
+    let newIndex = this.state.index - 1;
+    if (newIndex < 0) {
+      newIndex = 0;
+    }
+
+    let newTextColor = this.state.textColorHistory[newIndex];
+    let newBackgroundColor = this.state.backgroundColorHistory[newIndex];
 
     this.setState({
       textColor: newTextColor,
       backgroundColor: newBackgroundColor,
+      index: newIndex
     });
   }
 
-
   render() {
-    document.body.style.backgroundColor = this.state.backgroundColor;
+    console.log(this.state.textColorHistory);
     return (
       <div>
-        <p style={{ color: this.state.textColor }}>RANDOM</p>
+
+        <Instructions
+          handleRightArrowClick={this.handleGoingForward}
+          handleLeftArrowClick={this.handleGoingBackward}
+        />
+
+        <Random 
+          backgroundColor={this.state.backgroundColor}
+          textColor={this.state.textColor}
+        />
+
+        <Colors
+          backgroundColor={this.state.backgroundColor}
+          textColor={this.state.textColor}
+        />
+
       </div>
     );
   }

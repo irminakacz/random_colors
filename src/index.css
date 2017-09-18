@@ -1,7 +1,36 @@
+div.helper {
+  font-family: mono;
+  background-color: white;
+  box-shadow: 0.3em 0.3em #2f4c56;
+}
+
+div#instruction {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 1em;
+  padding: 0.6em;
+}
+
+div#instruction span:hover {
+  background-color: #d3d3d3;
+  cursor: pointer;
+}
+
+#colors {
+  position: absolute;
+  bottom: 0;
+  margin: 0em 0.5em;
+  padding: 1em;
+}
+
+#right {
+  float: right;
+}
+
 p {
-  font-family: Ubuntu, sans-serif;
+  font-family: sans-serif;
   font-weight: bold;
   font-size: 8em;
   text-align: center;
-  padding-top: 2em;
+  padding-top: 1.5em;
 }
