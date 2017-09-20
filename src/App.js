@@ -8,9 +8,10 @@ class App extends Component {
     super();
 
     this.state = {
-      textColor: "#000000",
+      numberOfColors: 2,
+      textColor: ["#000000", "#000000" ,"#000000"],
       backgroundColor: "#858f92",
-      textColorHistory: ["#000000"],
+      textColorHistory: [["#000000", "#000000" ,"#000000"]],
       backgroundColorHistory: ["#858f92"],
       index: 0
     }
@@ -20,6 +21,7 @@ class App extends Component {
       this.generateNewColorsAndAddThemToHistory.bind(this)
     this.handleGoingForward = this.handleGoingForward.bind(this);
     this.handleGoingBackward = this.handleGoingBackward.bind(this);
+    this.chooseNumberOfColors = this.chooseNumberOfColors.bind(this);
 
     window.addEventListener("keydown", this.randomize);
   }
@@ -49,8 +51,11 @@ class App extends Component {
 
 
   generateNewColorsAndAddThemToHistory() {
-    const newTextColor = this.generateRandomColor();
-    const newBackgroundColor = this.generateRandomColor();
+    let newTextColor = [];
+    newTextColor.push(this.generateRandomColor());
+    newTextColor.push(this.generateRandomColor());
+    newTextColor.push(this.generateRandomColor());
+    let newBackgroundColor = this.generateRandomColor();
 
     const newTextColorHistory = this.state.textColorHistory.slice();
     const newBackgroundColorHistory = this.state.backgroundColorHistory.slice();
@@ -113,6 +118,26 @@ class App extends Component {
     });
   }
 
+  chooseNumberOfColors(event) {
+    const clickedNumber = event.target;
+    const newNumberOfColors = clickedNumber.textContent;
+    this.highlightClickedNumber(clickedNumber);
+    this.setState({
+      numberOfColors: newNumberOfColors
+    });
+  }
+
+  highlightClickedNumber(node) {
+    const parent = node.parentNode;
+    let siblings = parent.childNodes;
+    siblings.forEach(node => {
+      if (node.className) {
+        node.className = node.className.replace("highlight", "");
+      }
+    });
+    node.className += "highlight";
+  }
+
   render() {
     return (
       <div>
@@ -120,16 +145,19 @@ class App extends Component {
         <Instructions
           handleRightArrowClick={this.handleGoingForward}
           handleLeftArrowClick={this.handleGoingBackward}
+          handleChangingColor={this.chooseNumberOfColors}
         />
 
         <Random 
           backgroundColor={this.state.backgroundColor}
           textColor={this.state.textColor}
+          numberOfColors={this.state.numberOfColors}
         />
 
         <Colors
           backgroundColor={this.state.backgroundColor}
           textColor={this.state.textColor}
+          numberOfColors={this.state.numberOfColors}
         />
 
       </div>

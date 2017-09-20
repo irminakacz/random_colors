@@ -128,3 +128,8 @@ p {
   font-weight: bold;
   text-align: center;
 }
+
+.highlight {
+  color: white;
+  background-color: black;
+}

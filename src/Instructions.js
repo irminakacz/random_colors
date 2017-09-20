@@ -14,11 +14,18 @@ class Instructions extends Component {
               </div>
             </td>
             <td>
-              <div id="center"> |
-                <div> 2 </div> |
-                <div> 3 </div> |
-                <div> 4 </div> |
-              </div>
+              <span id="center"> |
+                <div 
+                  className="highlight"
+                  onClick={this.props.handleChangingColor}
+                > 2 </div> |
+                <div 
+                  onClick={this.props.handleChangingColor}
+                > 3 </div> |
+                <div 
+                  onClick={this.props.handleChangingColor}
+                > 4 </div> |
+              </span>
             </td>
             <td>
               <div id="right" onClick={this.props.handleRightArrowClick}>
@@ -40,11 +47,18 @@ class Instructions extends Component {
           </tr>
           <tr>
             <td>
-              <div id="center"> |
-                <div> 2 </div> |
-                <div> 3 </div> |
-                <div> 4 </div> |
-              </div>
+              <span id="center"> |
+                <div 
+                  className="highlight"
+                  onClick={this.props.handleChangingColor}
+                > 2 </div> |
+                <div 
+                  onClick={this.props.handleChangingColor}
+                > 3 </div> |
+                <div 
+                  onClick={this.props.handleChangingColor}
+                > 4 </div> |
+              </span>
             </td>
           </tr>
           <tr>
