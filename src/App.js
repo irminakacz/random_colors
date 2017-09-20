@@ -43,7 +43,7 @@ class App extends Component {
   }
 
 
-  handleGoingBackward(event) {
+  handleGoingBackward() {
     this.changeToPreviousColors();
   }
 
