@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import Instructions from './Instructions';
 import Random from './Random';
 import Colors from './Colors';
+import EditText from './EditText';
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
+      text: ["RANDOM", "RANDOM", "RANDOM"],
       numberOfColors: 2,
       textColor: ["#000000", "#000000" ,"#000000"],
       backgroundColor: "#858f92",
@@ -22,6 +24,7 @@ class App extends Component {
     this.handleGoingForward = this.handleGoingForward.bind(this);
     this.handleGoingBackward = this.handleGoingBackward.bind(this);
     this.chooseNumberOfColors = this.chooseNumberOfColors.bind(this);
+    this.changeText = this.changeText.bind(this);
 
     window.addEventListener("keydown", this.randomize);
   }
@@ -138,6 +141,14 @@ class App extends Component {
     node.className += "highlight";
   }
 
+  changeText(textNumber, event) {
+    let newText = this.state.text.slice();
+    newText[textNumber] = event.target.value;
+    this.setState({
+      text: newText
+    })
+  }
+
   render() {
     return (
       <div>
@@ -149,6 +160,7 @@ class App extends Component {
         />
 
         <Random 
+          text={this.state.text}
           backgroundColor={this.state.backgroundColor}
           textColor={this.state.textColor}
           numberOfColors={this.state.numberOfColors}
@@ -158,6 +170,12 @@ class App extends Component {
           backgroundColor={this.state.backgroundColor}
           textColor={this.state.textColor}
           numberOfColors={this.state.numberOfColors}
+        />
+
+        <EditText
+          text={this.state.text}
+          numberOfColors={this.state.numberOfColors}
+          handleChange={this.changeText}
         />
 
       </div>
