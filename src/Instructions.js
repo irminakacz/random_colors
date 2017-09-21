@@ -16,13 +16,13 @@ class Instructions extends Component {
             <td>
               <span id="center"> |
                 <div 
-                  className="highlight"
                   onClick={this.props.handleChangingColor}
                 > 2 </div> |
                 <div 
                   onClick={this.props.handleChangingColor}
                 > 3 </div> |
                 <div 
+                  className="highlight"
                   onClick={this.props.handleChangingColor}
                 > 4 </div> |
               </span>

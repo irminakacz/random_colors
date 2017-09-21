@@ -9,12 +9,12 @@ class App extends Component {
     super();
 
     this.state = {
-      text: ["RANDOM", "RANDOM", "RANDOM"],
-      numberOfColors: 2,
-      textColor: ["#000000", "#000000" ,"#000000"],
-      backgroundColor: "#858f92",
-      textColorHistory: [["#000000", "#000000" ,"#000000"]],
-      backgroundColorHistory: ["#858f92"],
+      text: ["RANDOM", "COLOR", "SET"],
+      numberOfColors: 4,
+      textColor: ["#FAEAB8", "#F70B82" ,"#E2942D"],
+      backgroundColor: "#932B0D",
+      textColorHistory: [["#FAEAB8", "#F70B82" ,"#E2942D"]],
+      backgroundColorHistory: ["#932B0D"],
       index: 0
     }
 
