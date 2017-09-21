@@ -143,10 +143,12 @@ class App extends Component {
 
   changeText(textNumber, event) {
     let newText = this.state.text.slice();
-    newText[textNumber] = event.target.value;
-    this.setState({
-      text: newText
-    })
+    if (event.target.value.length < 12) {
+      newText[textNumber] = event.target.value;
+      this.setState({
+        text: newText
+      })
+    }
   }
 
   render() {

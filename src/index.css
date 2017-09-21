@@ -130,6 +130,11 @@ table {
   padding: 1em;
 }
 
+#edit-text input {
+  font-family: mono;
+  margin: 0.2em;
+}
+
 p {
   font-family: sans-serif;
   font-weight: bold;
