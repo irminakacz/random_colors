@@ -126,9 +126,9 @@ table {
 
 #edit-text {
   position: absolute;
-  float: right;
   bottom: 0;
-  margin-left: 15em;
+  right: 0;
+  margin-right: 3vw;
   padding: 0.7em;
 }
 
