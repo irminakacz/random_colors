@@ -4,9 +4,10 @@ class EditText extends Component {
   render() {
     return (
       <div id="edit-text" className="helper">
+
         <span>
           <span>
-            Text1:
+            #1:
             <input 
               type="text" 
               value={this.props.text[0]}
@@ -17,7 +18,7 @@ class EditText extends Component {
 
           { this.props.numberOfColors > 2 &&
             <span>
-              Text2:
+              #2:
               <input 
                 type="text" 
                 value={this.props.text[1]}
@@ -29,7 +30,7 @@ class EditText extends Component {
 
           { this.props.numberOfColors > 3 &&
             <span>
-              Text3:
+              #3:
               <input 
                 type="text" 
                 value={this.props.text[2]}
